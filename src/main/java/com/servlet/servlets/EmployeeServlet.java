@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/shop")
-public class CustomerServlet extends HttpServlet {
+@WebServlet("/employee")
+public class EmployeeServlet extends HttpServlet {
     final static Logger logger = Logger.getLogger(MainServlet.class);
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-    }
+        String[] checkboxes = req.getParameterValues("itemCheck");
+        logger.info("Checked checkboxes array size: " + checkboxes.length);
+        logger.info("First checked item name: " + checkboxes[0]);
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+        req.getRequestDispatcher("employee-start.jsp").forward(req, resp);
 
     }
 }

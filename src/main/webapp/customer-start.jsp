@@ -6,6 +6,5 @@
 </head>
 <body>
 <h1>Hello dear customer!</h1>
-<h1>${name}</h1>
 </body>
 </html>
