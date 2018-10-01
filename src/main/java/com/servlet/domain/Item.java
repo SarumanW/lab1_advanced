@@ -1,23 +1,35 @@
 package com.servlet.domain;
 
-public class Item {
-    private Long itemId;
-    private String name;
-    private double price;
-    private String supplier;
+import java.util.UUID;
 
-    Item(Long itemId, String name, double price, String supplier) {
+public class Item {
+    private String itemId;
+    private String name;
+    private int price;
+    private String supplier;
+    private int count;
+
+    Item(String itemId, String name, int price, String supplier, int count) {
         this.itemId = itemId;
         this.name = name;
         this.price = price;
         this.supplier = supplier;
+        this.count = count;
     }
 
-    public Long getItemId() {
+    Item(String name, int price, String supplier, int count) {
+        this.itemId = UUID.randomUUID().toString();
+        this.name = name;
+        this.price = price;
+        this.supplier = supplier;
+        this.count = count;
+    }
+
+    public String getItemId() {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId(String itemId) {
         this.itemId = itemId;
     }
 
@@ -33,7 +45,7 @@ public class Item {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -43,5 +55,13 @@ public class Item {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

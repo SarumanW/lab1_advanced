@@ -1,5 +1,6 @@
 package com.servlet.servlets;
 
+import com.servlet.domain.Item;
 import com.servlet.domain.ShopStore;
 import org.apache.log4j.Logger;
 
@@ -27,10 +28,7 @@ public class MainServlet extends HttpServlet {
             throws ServletException, IOException {
         logger.info(req.getParameter("hero"));
 
-        Map<Long, Object> items = ShopStore.getInstance().getAllItems();
-        req.setAttribute("items", items);
-
-        if("employee".equals(req.getParameter("hero"))){
+        if("Employee".equals(req.getParameter("hero"))){
             req.getRequestDispatcher("employee-start.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("customer-start.jsp").forward(req, resp);
