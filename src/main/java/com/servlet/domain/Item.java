@@ -2,12 +2,21 @@ package com.servlet.domain;
 
 import java.util.UUID;
 
-public class Item {
+public class Item implements Cloneable{
     private String itemId;
     private String name;
     private int price;
     private String supplier;
     private int count;
+
+    @Override
+    public Object clone(){
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            return new Item(this.getItemId(), this.getName(), (int) this.getPrice(),this.getSupplier(), this.getCount());
+        }
+    }
 
     Item(String itemId, String name, int price, String supplier, int count) {
         this.itemId = itemId;
@@ -63,5 +72,16 @@ public class Item {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemId='" + itemId + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", supplier='" + supplier + '\'' +
+                ", count=" + count +
+                '}';
     }
 }

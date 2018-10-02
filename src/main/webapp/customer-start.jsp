@@ -43,6 +43,7 @@
     </head>
     <body>
         <h1>Hello dear customer!</h1>
+        <a href="/app">Go back</a>
         <h2>Choose items and their count and press button 'Buy!'</h2>
 
         <form method="post" action="customer">
@@ -63,12 +64,12 @@
                         <td><c:out value="${entry.value.price}"/></td>
                         <td><c:out value="${entry.value.supplier}"/></td>
                         <td><c:out value="${entry.value.count}"/></td>
-                        <td><input type="text" name="productsCount" placeholder="" autocomplete="false"/></td>
+                        <td><input type="text" name="productsCount" placeholder="" autocomplete="off"/></td>
                     </tr>
                 </c:forEach>
             </table>
 
-            <input type="text" name="customerName" placeholder="Type your full name" autocomplete="false"/>
+            <input type="text" name="customerName" placeholder="Type your full name" autocomplete="off"/>
             <input type="submit" value="Buy"/>
         </form>
 

@@ -1,6 +1,7 @@
 package com.servlet.servlets;
 
 import com.servlet.domain.Customer;
+import com.servlet.domain.Item;
 import com.servlet.domain.Purchase;
 import com.servlet.domain.ShopStore;
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @WebServlet("/customer")
@@ -26,7 +28,7 @@ public class CustomerServlet extends HttpServlet {
 
         Object[] checkedCounts = Arrays.stream(productsCount).filter(x -> x!=null && !x.isEmpty()).toArray();
 
-        logger.info("CheckedCounts: " + checkedCounts.length);
+        logger.info("CheckedCounts: " + checkedCounts.length + " - " + checkedCounts[0]);
 
         Customer customer = ShopStore.getInstance().getCustomer(customerName);
         if(customer == null){
@@ -36,6 +38,7 @@ public class CustomerServlet extends HttpServlet {
 
         Purchase purchase = new Purchase(customer, ShopStore.getInstance().getArrayOfItemsByIds(checkedItems,
                 Arrays.copyOf(checkedCounts, checkedCounts.length, String[].class)));
+
         ShopStore.getInstance().putPurchase(purchase);
 
         logger.info("Customer made a purchase: " + purchase);

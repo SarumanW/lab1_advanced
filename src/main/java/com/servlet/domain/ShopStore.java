@@ -1,5 +1,8 @@
 package com.servlet.domain;
 
+import com.servlet.servlets.MainServlet;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
@@ -16,6 +19,8 @@ public class ShopStore {
     private Map<String, Customer> customers;
     private final Lock readLock;
     private final Lock writeLock;
+
+    final static Logger logger = Logger.getLogger(ShopStore.class);
 
     private static ShopStore shopStore = new ShopStore();
 
@@ -59,11 +64,13 @@ public class ShopStore {
 
     public ArrayList<Item> getArrayOfItemsByIds(String[] itemIds, String[] counts){
         ArrayList<Item> items = new ArrayList<>();
+
         for(int i = 0; i < itemIds.length; i++){
-            Item item = getItem(itemIds[i]);
+            Item item = (Item) getItem(itemIds[i]).clone();
             item.setCount(Integer.valueOf(counts[i]));
             items.add(item);
         }
+
         return items;
     }
 
@@ -123,7 +130,8 @@ public class ShopStore {
     private void fillItems(){
         for(long i = 0; i<10; i++){
             String uuid = UUID.randomUUID().toString();
-            items.put(uuid, new Item(uuid, "item " + i, ThreadLocalRandom.current().nextInt(10, 100), "default supplier", 10));
+            items.put(uuid, new Item(uuid, "item " + i,
+                    ThreadLocalRandom.current().nextInt(10, 100), "default supplier", 10));
         }
     }
 }
