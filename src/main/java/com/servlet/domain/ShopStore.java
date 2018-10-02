@@ -1,11 +1,8 @@
 package com.servlet.domain;
 
-import com.servlet.servlets.MainServlet;
 import org.apache.log4j.Logger;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,6 +16,7 @@ public class ShopStore {
     private Map<String, Purchase> purchases;
     private Map<String, Item> items;
     private Map<String, Customer> customers;
+    private Map<String, Customer> blackList;
     private final Lock readLock;
     private final Lock writeLock;
 
@@ -34,11 +32,13 @@ public class ShopStore {
         purchases = new ConcurrentHashMap<>();
         items = new ConcurrentHashMap<>();
         customers = new ConcurrentHashMap<>();
-        fillItems();
+        blackList = new ConcurrentHashMap<>();
 
         ReadWriteLock readWriteLock = new ReentrantReadWriteLock(true);
         readLock = readWriteLock.readLock();
         writeLock = readWriteLock.writeLock();
+
+        fillItems();
     }
 
     public void putItem(Item value) {
@@ -117,6 +117,19 @@ public class ShopStore {
         }
     }
 
+    public void putCustomerToBlackList(Customer value) {
+        writeLock.lock();
+
+        if(blackList.size() == MAX_SIZE)
+            blackList.clear();
+
+        try {
+            blackList.put(value.getCustomerName(), value);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
     public Map<String, Item> getAllItems(){
         return items;
     }
@@ -129,6 +142,10 @@ public class ShopStore {
         return customers;
     }
 
+    public Map<String, Customer> getAllBlackList(){
+        return blackList;
+    }
+
     private void fillItems(){
         for(int i = 0; i<10; i++){
             String uuid = UUID.randomUUID().toString();
@@ -138,7 +155,11 @@ public class ShopStore {
             ArrayList<Item> items = new ArrayList<>();
             items.add(new Item("item - " + i, ThreadLocalRandom.current().nextInt(10, 100), "default supplier", 5));
             items.add(new Item("item - " + i + 1, ThreadLocalRandom.current().nextInt(10, 100), "default supplier", 5));
-            Purchase purchase = new Purchase(new Customer("customer - " + i), items);
+
+            Customer customer = new Customer("customer - " + i);
+            putCustomer(customer);
+
+            Purchase purchase = new Purchase(customer, items);
             purchases.put(purchase.getPurchaseId(), purchase);
         }
 

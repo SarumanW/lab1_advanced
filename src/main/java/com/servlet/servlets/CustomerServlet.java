@@ -31,6 +31,7 @@ public class CustomerServlet extends HttpServlet {
         logger.info("CheckedCounts: " + checkedCounts.length + " - " + checkedCounts[0]);
 
         Customer customer = ShopStore.getInstance().getCustomer(customerName);
+
         if(customer == null){
             customer = new Customer(customerName);
             ShopStore.getInstance().putCustomer(customer);

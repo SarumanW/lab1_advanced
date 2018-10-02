@@ -19,6 +19,8 @@ public class EmployeeServlet extends HttpServlet {
             req.getRequestDispatcher("items.jsp").forward(req, resp);
         } else if("Purchases list".equals(req.getParameter("action"))){
             req.getRequestDispatcher("purchases.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("blacklist.jsp").forward(req, resp);
         }
     }
 

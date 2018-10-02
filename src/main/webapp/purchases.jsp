@@ -25,7 +25,7 @@
         }
 
         td, th {
-            border: 1px solid #dddddd;
+            border: none;
             text-align: left;
             padding: 8px;
             width: calc(100vh / 5);
@@ -33,6 +33,10 @@
 
         td, th:nth-child(1) {
             width: 30px;
+        }
+
+        .inside {
+            border: 1px solid #dddddd;
         }
     </style>
 
@@ -42,7 +46,7 @@
 <h1>Purchases list</h1>
 <a href="/app/employee?">Go back</a>
 
-<form method="post" action="customer">
+<form method="post" action="purchase">
     <table>
         <tr>
             <th></th>
@@ -53,21 +57,20 @@
 
         <c:forEach var="entry" items="${purchases}">
             <tr>
-                <td><input type="checkbox" name="itemCheck" value="${entry.value.purchaseId}"/></td>
-                <td><c:out value="${entry.value.customer.customerName}"/></td>
-                <%--<td><c:out value="${entry.value.items[0].count}"/></td>--%>
-                <td>
-                    <c:out value="${entry.value.items[0].name}"/>
-                    <c:forEach begin="1" var="item" items="${entry.value.items}">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td><c:out value="${item.name}"/></td>
-                            <td><c:out value="${item.count}"/></td>
-                        </tr>
-                    </c:forEach>
-                </td>
-            </tr>
+            <td>
+                <input type="submit" name="add" value="Add to blacklist" id="${entry.value.customer.customerId}"/>
+                <input type="hidden" name="addToBlackList" value="${entry.value.customer.customerId}">
+            </td>
+            <td><c:out value="${entry.value.customer.customerName}"/></td>
+            <td>
+            <c:forEach begin="0" var="item" items="${entry.value.items}">
+                <tr class="inside">
+                    <td></td>
+                    <td></td>
+                    <td><c:out value="${item.name}"/></td>
+                    <td><c:out value="${item.count}"/></td>
+                </tr>
+            </c:forEach>
         </c:forEach>
     </table>
 </form>
