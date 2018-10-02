@@ -7,9 +7,12 @@
 <body>
 <h1>Online product shop</h1>
 <h2>Choose your role:</h2>
-<form method="post" action="">
-    <input type="submit" name="hero" value="Customer" />
-    <input type="submit" name="hero" value="Employee" />
+<form method="get" action="customer">
+    <input type="submit" value="Customer" />
+</form>
+
+<form method="get" action="employee">
+    <input type="submit" value="Employee" />
 </form>
 </body>
 </html>

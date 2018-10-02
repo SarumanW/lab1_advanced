@@ -26,12 +26,16 @@ public class Item implements Cloneable{
         this.count = count;
     }
 
-    Item(String name, int price, String supplier, int count) {
+    public Item(String name, int price, String supplier, int count) {
         this.itemId = UUID.randomUUID().toString();
         this.name = name;
         this.price = price;
         this.supplier = supplier;
         this.count = count;
+    }
+
+    public Item(){
+
     }
 
     public String getItemId() {

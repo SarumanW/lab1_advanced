@@ -11,9 +11,9 @@
 <h1>Hello dear employee!</h1>
 
 <form method="post" action="employee">
-    <input type="submit" name="hero" value="Items list"/>
-    <input type="submit" name="hero" value="Black Customers list"/>
-    <input type="submit" name="hero" value="Purchases list"/>
+    <input type="submit" name="action" value="Items list"/>
+    <input type="submit" name="action" value="Black Customers list"/>
+    <input type="submit" name="action" value="Purchases list"/>
 </form>
 </body>
 </html>

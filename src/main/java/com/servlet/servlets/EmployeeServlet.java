@@ -15,6 +15,15 @@ public class EmployeeServlet extends HttpServlet {
 
     protected void doPost (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        if("Items list".equals(req.getParameter("action"))){
+            req.getRequestDispatcher("items.jsp").forward(req, resp);
+        } else if("Purchases list".equals(req.getParameter("action"))){
+            req.getRequestDispatcher("purchases.jsp").forward(req, resp);
+        }
+    }
 
+    protected void doGet (HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.getRequestDispatcher("employee-start.jsp").forward(req, resp);
     }
 }

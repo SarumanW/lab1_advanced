@@ -3,7 +3,9 @@ package com.servlet.domain;
 import com.servlet.servlets.MainServlet;
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -128,10 +130,17 @@ public class ShopStore {
     }
 
     private void fillItems(){
-        for(long i = 0; i<10; i++){
+        for(int i = 0; i<10; i++){
             String uuid = UUID.randomUUID().toString();
             items.put(uuid, new Item(uuid, "item " + i,
                     ThreadLocalRandom.current().nextInt(10, 100), "default supplier", 10));
+
+            ArrayList<Item> items = new ArrayList<>();
+            items.add(new Item("item - " + i, ThreadLocalRandom.current().nextInt(10, 100), "default supplier", 5));
+            items.add(new Item("item - " + i + 1, ThreadLocalRandom.current().nextInt(10, 100), "default supplier", 5));
+            Purchase purchase = new Purchase(new Customer("customer - " + i), items);
+            purchases.put(purchase.getPurchaseId(), purchase);
         }
+
     }
 }

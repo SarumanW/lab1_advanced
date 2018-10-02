@@ -11,6 +11,10 @@ public class Customer {
         this.customerName = customerName;
     }
 
+    public Customer(){
+
+    }
+
     public String getCustomerId() {
         return customerId;
     }
