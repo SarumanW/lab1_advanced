@@ -40,13 +40,28 @@
         }
     </style>
 
+    <script type="text/javascript">
+
+        function setAttributee(value) {
+            console.log(value);
+            document.getElementById('added').setAttribute('value', value);
+        }
+
+    </script>
+
+
     <title>Servlet</title>
 </head>
 <body>
 <h1>Purchases list</h1>
 <a href="/app/employee?">Go back</a>
 
+<h2>${help}</h2>
+
 <form method="post" action="purchase">
+
+    <input type="hidden" id="added" name="customerId" value="">
+
     <table>
         <tr>
             <th></th>
@@ -58,7 +73,7 @@
         <c:forEach var="entry" items="${purchases}">
             <tr>
             <td>
-                <input type="submit" name="add" value="Add to blacklist" id="${entry.value.customer.customerId}"/>
+                <input type="submit" value="Add to blacklist" id="${entry.value.customer.customerId}" onclick="setAttributee(id)"/>
                 <input type="hidden" name="addToBlackList" value="${entry.value.customer.customerId}">
             </td>
             <td><c:out value="${entry.value.customer.customerName}"/></td>
@@ -74,6 +89,7 @@
         </c:forEach>
     </table>
 </form>
+
 
 </body>
 </html>

@@ -56,7 +56,7 @@
                 <version>2.1</version>
                 <configuration>
                     <server>my-tomcat</server>
-                    <url>http://localhost:8089/manager/text</url>
+                    <url>http://localhost:8181/manager/text</url>
                     <path>/app</path>
                     <username>manager</username>
                     <password>managerPwd</password>

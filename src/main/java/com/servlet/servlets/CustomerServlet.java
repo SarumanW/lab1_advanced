@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 @WebServlet("/customer")
 public class CustomerServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(MainServlet.class);
+    final static Logger logger = Logger.getLogger(CustomerServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

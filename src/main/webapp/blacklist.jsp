@@ -55,11 +55,13 @@
     <table>
         <tr>
             <th>Customer Name</th>
+            <th>Id</th>
         </tr>
 
         <c:forEach var="entry" items="${customers}">
             <tr>
                 <td><c:out value="${entry.value.customerName}"/></td>
+                <td><c:out value="${entry.value.customerId}"/></td>
             </tr>
         </c:forEach>
     </table>

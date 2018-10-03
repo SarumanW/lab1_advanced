@@ -111,7 +111,7 @@ public class ShopStore {
             customers.clear();
 
         try {
-            customers.put(value.getCustomerName(), value);
+            customers.put(value.getCustomerId(), value);
         } finally {
             writeLock.unlock();
         }

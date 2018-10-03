@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet("/employee")
 public class EmployeeServlet extends HttpServlet {
-    final static Logger logger = Logger.getLogger(MainServlet.class);
+    final static Logger logger = Logger.getLogger(EmployeeServlet.class);
 
     protected void doPost (HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
